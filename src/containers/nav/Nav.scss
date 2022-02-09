@@ -1,0 +1,17 @@
+.nav {
+  border: 2px solid black;
+  width: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media screen and(min-width: 1000px) {
+  .nav {
+    flex-direction: column;
+  }
+}

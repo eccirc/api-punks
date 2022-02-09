@@ -1,0 +1,10 @@
+.filter {
+  color: orange;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  &__check {
+    width: 40px;
+    color: orange;
+  }
+}
