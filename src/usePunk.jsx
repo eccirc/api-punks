@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-const usePunk = (url) => {
+const usePunk = (filter) => {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState("waiting");
 
+  const brewDog = "https://api.punkapi.com/v2/beers?per_page=80" + filter;
+
   useEffect(() => {
-    if (!url) return;
+    if (!filter) return;
     const fetchData = async () => {
       setStatus("fetching");
-      const response = await fetch(url);
+      const response = await fetch(brewDog);
       const data = await response.json();
       setData(data);
       setStatus("fetched");
     };
 
     fetchData();
-  }, [url]);
+  }, [filter]);
 
   return { data, status };
 };

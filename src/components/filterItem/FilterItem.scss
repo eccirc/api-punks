@@ -1,7 +1,7 @@
 .filter {
   color: orange;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 2rem;
   &__check {
     width: 40px;
