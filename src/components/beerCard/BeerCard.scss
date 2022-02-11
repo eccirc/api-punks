@@ -1,5 +1,7 @@
+@import "../../vars";
+
 .card {
-  border: 2px solid black;
+  border: 2px solid $theme-black;
   border-radius: 20px;
   display: flex;
   padding: 2rem;
@@ -7,18 +9,22 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  background-color: #f6f6f6;
-  opacity: 0.9;
+  background-color: $theme-white;
+  opacity: 0.8;
   transition: all 0.2s ease-in-out;
   &__img {
     height: 200px;
     object-fit: contain;
   }
   &__title {
-    color: #0ec2e2;
+    color: $punk-blue;
+    font-family: $main-font;
   }
   &__sub {
-    font-style: italic;
+    font-weight: bold;
+    color: $theme-black;
+    font-family: $secondary-font;
+    font-size: large;
   }
   &__info {
     max-height: 100px;

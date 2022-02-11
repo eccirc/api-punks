@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 
 const App = () => {
   const [filter, setFilter] = useState("&");
-  const [checkBoxState, setCheckBoxState] = useState(new Array(3).fill(false));
-  const [sliderState, setSLiderState] = useState(6);
+  const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
+  const [sliderState, setSLiderState] = useState(1);
   const { data, status } = usePunk(filter);
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
@@ -54,7 +54,7 @@ const App = () => {
 
   const handleCheckBox = (pos) => {
     const updatedCheckedState = checkBoxState.map((item, index) =>
-      index === pos ? !item : item
+      index === pos ? (item = true) : (item = false)
     );
     setCheckBoxState(updatedCheckedState);
     console.log(checkBoxState);
