@@ -1,8 +1,25 @@
+@import "../../vars";
+
 .beers {
   min-height: 100vh;
   width: 100%;
-  border: 2px solid black;
   padding: 2rem;
+
+  &__heading {
+    display: flex;
+    text-align: center;
+    color: $punk-blue;
+    justify-content: space-around;
+    align-items: center;
+    &_logo {
+      width: 100px;
+    }
+    &_title {
+      font-size: 50px;
+      font-family: $main-font;
+      margin-left: 2rem;
+    }
+  }
 
   &__container {
     margin-top: 2rem;

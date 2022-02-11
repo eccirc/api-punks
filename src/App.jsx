@@ -10,12 +10,16 @@ const App = () => {
   const [checkBoxState, setCheckBoxState] = useState(new Array(3).fill(false));
   const { data, status } = usePunk(filter);
   const [filteredBeers, setFilteredBeers] = useState([]);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
-    if (checkBoxState[0]) setFilteredBeers(filterByAbv(6));
-    else if (checkBoxState[1]) setFilteredBeers(filterByClassic());
-    else if (checkBoxState[2]) setFilteredBeers(filterByHighPh());
-    else setFilteredBeers(data);
+    if (checkBoxState[0]) {
+      setFilteredBeers(filterByAbv(6));
+    } else if (checkBoxState[1]) {
+      setFilteredBeers(filterByClassic("2010"));
+    } else if (checkBoxState[2]) {
+      setFilteredBeers(filterByHighPh());
+    } else setFilteredBeers(data);
   }, [status, checkBoxState]);
 
   const handleSearchInput = (event) => {
@@ -25,17 +29,6 @@ const App = () => {
     });
     setFilteredBeers(termFilter);
   };
-
-  // const handleCheck1 = () => {
-  //   setCheck1(!check1);
-  //   !check1 ? setFilter("&abv_gt=6") : setFilter("&");
-  //   setFilteredBeers(data);
-  // };
-  // const handleCheck2 = () => {
-  //   setCheck2(!check2);
-  //   !check2 ? setFilter("&brewed_before=10-2011") : setFilter("&");
-  //   setFilteredBeers(data);
-  // };
   const filterByHighPh = () => {
     return data.filter((beer) => {
       return beer.ph <= 4;
@@ -46,19 +39,13 @@ const App = () => {
       return beer.abv > num;
     });
   };
-  const filterByClassic = () => {
+  const filterByClassic = (yearStr) => {
     return data.filter((beer) => {
       const year = beer.first_brewed.split("/")[1];
-      return year < "2010";
+      return year < yearStr;
     });
   };
 
-  // const setSearchState = () => {
-  //   const termFilter = data.filter((beer) => {
-  //     return beer.name.toLowerCase().includes(searchTerm);
-  //   });
-  //   return termFilter;
-  // };
   const handleCheckBox = (pos) => {
     const updatedCheckedState = checkBoxState.map((item, index) =>
       index === pos ? !item : item
@@ -66,13 +53,21 @@ const App = () => {
     setCheckBoxState(updatedCheckedState);
     console.log(checkBoxState);
   };
-  console.log(filteredBeers);
+
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <div className="App">
-      <Nav handleCheckBox={handleCheckBox} handleSearch={handleSearchInput} />
+      <Nav
+        handleCheckBox={handleCheckBox}
+        checkBoxState={checkBoxState}
+        handleSearch={handleSearchInput}
+        toggleStyle={showMenu}
+      />
       {status === "fetched" ? (
-        <BeersList beersArr={filteredBeers} />
+        <BeersList beersArr={filteredBeers} toggle={handleMenuToggle} />
       ) : (
         "Waiting for beers..."
       )}

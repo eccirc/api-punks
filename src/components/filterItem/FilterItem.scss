@@ -1,8 +1,13 @@
+@import "../../vars";
+
 .filter {
-  color: orange;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  color: #142727;
+  font-weight: bold;
+  font-family: $secondary-font;
+
   &__check {
     width: 40px;
     color: orange;

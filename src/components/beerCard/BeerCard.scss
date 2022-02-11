@@ -7,14 +7,25 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
+  background-color: #f6f6f6;
+  opacity: 0.9;
+  transition: all 0.2s ease-in-out;
   &__img {
     height: 200px;
     object-fit: contain;
   }
   &__title {
-    color: rgb(14, 194, 226);
+    color: #0ec2e2;
   }
   &__sub {
     font-style: italic;
   }
+  &__info {
+    max-height: 100px;
+    overflow-y: scroll;
+  }
+}
+
+.card:hover {
+  opacity: 1;
 }

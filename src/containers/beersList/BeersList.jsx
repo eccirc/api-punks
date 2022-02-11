@@ -1,22 +1,11 @@
 import React from "react";
 import "./BeersList.scss";
 import { BeerCard } from "../../components/beerCard/BeerCard";
-
-/*
-
-Beer Data:
-
-name": "Buzz",
-      "tagline": "A Real Bitter Experience.",
-      "first_brewed": "09/2007",
-      "description": "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
-      "image_url": "https://images.punkapi.com/v2/keg.png",
-      "abv": 4.5,
-
-*/
+import logo from "../../assets/brewdog-logo.png";
+import search from "../../assets/search-line.png";
 
 export const BeersList = (props) => {
-  const { beersArr } = props;
+  const { beersArr, toggle } = props;
 
   const allTheBeers = () => {
     return beersArr.map((beer, index) => (
@@ -26,13 +15,23 @@ export const BeersList = (props) => {
         name={beer.name}
         sub={beer.tagline}
         info={beer.description}
+        abv={beer.abv}
       />
     ));
   };
 
   return (
     <div className="beers">
-      <h2>PUNK API</h2>
+      <div className="beers__heading">
+        <img
+          onClick={toggle}
+          src={search}
+          alt="search for beers"
+          className="beers__heading_logo"
+        />
+        <h2 className="beers__heading_title">PUNK API</h2>
+        <img src={logo} alt="brewdog logo" className="beers__heading_logo" />
+      </div>
       <div className="beers__container">{allTheBeers()}</div>
     </div>
   );
