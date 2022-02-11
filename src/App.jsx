@@ -8,19 +8,20 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [filter, setFilter] = useState("&");
   const [checkBoxState, setCheckBoxState] = useState(new Array(3).fill(false));
+  const [sliderState, setSLiderState] = useState(6);
   const { data, status } = usePunk(filter);
   const [filteredBeers, setFilteredBeers] = useState([]);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
 
   useEffect(() => {
     if (checkBoxState[0]) {
-      setFilteredBeers(filterByAbv(6));
+      setFilteredBeers(filterByAbv());
     } else if (checkBoxState[1]) {
       setFilteredBeers(filterByClassic("2010"));
     } else if (checkBoxState[2]) {
       setFilteredBeers(filterByHighPh());
     } else setFilteredBeers(data);
-  }, [status, checkBoxState]);
+  }, [status, checkBoxState, sliderState]);
 
   const handleSearchInput = (event) => {
     let searchTerm = event.target.value.toLowerCase();
@@ -34,9 +35,9 @@ const App = () => {
       return beer.ph <= 4;
     });
   };
-  const filterByAbv = (num) => {
+  const filterByAbv = () => {
     return data.filter((beer) => {
-      return beer.abv > num;
+      return beer.abv > sliderState;
     });
   };
   const filterByClassic = (yearStr) => {
@@ -44,6 +45,11 @@ const App = () => {
       const year = beer.first_brewed.split("/")[1];
       return year < yearStr;
     });
+  };
+  const handleSlider = (event) => {
+    let num = event.target.value;
+    setSLiderState(num);
+    console.log(num);
   };
 
   const handleCheckBox = (pos) => {
@@ -64,6 +70,8 @@ const App = () => {
         handleCheckBox={handleCheckBox}
         checkBoxState={checkBoxState}
         handleSearch={handleSearchInput}
+        handleSlider={handleSlider}
+        sliderVal={sliderState}
         toggleStyle={showMenu}
       />
       {status === "fetched" ? (

@@ -6,7 +6,9 @@
 }
 
 .App {
-  background: url(./assets/scotland_bg.jpg) no-repeat center center fixed;
+  background: url(./assets/beer_pour.jpg) no-repeat center right fixed;
+
+  background-size: cover;
 
   display: grid;
   grid-template-columns: 1fr;

@@ -2,7 +2,14 @@ import React from "react";
 import "./FilterItem.scss";
 
 export const FilterItem = (props) => {
-  const { title, isChecked, handleChecked, handleSlide } = props;
+  const {
+    title,
+    isChecked,
+    handleChecked,
+    hasSlider,
+    handleSlider,
+    sliderVal,
+  } = props;
   return (
     <div className="filter">
       <label htmlFor="">{title}</label>
@@ -14,7 +21,15 @@ export const FilterItem = (props) => {
         checked={isChecked}
         onChange={handleChecked}
       />
-      <input type="range" min="1" max="60" value="6" onChange={handleSlide} />
+      {hasSlider && (
+        <input
+          type="range"
+          min="1"
+          max="20"
+          defaultValue={sliderVal}
+          onChange={handleSlider}
+        />
+      )}
     </div>
   );
 };
