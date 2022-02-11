@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-const usePunk = (filter) => {
+const usePunk = (filter, page) => {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState("waiting");
 
-  const brewDog = "https://api.punkapi.com/v2/beers?per_page=80" + filter;
+  const brewDog = `https://api.punkapi.com/v2/beers?page=${page}` + filter;
 
   useEffect(() => {
     if (!filter) return;
@@ -17,9 +17,9 @@ const usePunk = (filter) => {
     };
 
     fetchData();
-  }, [filter]);
+  }, [filter, page]);
 
-  return { data, status };
+  return { data, status, page };
 };
 
 export default usePunk;
