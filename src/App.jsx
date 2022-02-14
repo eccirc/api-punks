@@ -7,11 +7,9 @@ import usePunk from "./usePunk";
 import { useState, useEffect } from "react";
 
 const App = () => {
-  const [filter, setFilter] = useState("&");
-  const [page, setPage] = useState(1);
   const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
-  const [sliderState, setSLiderState] = useState(page);
-  const { data, status } = usePunk(filter, page);
+  const [sliderState, setSLiderState] = useState(0);
+  const { data, status } = usePunk();
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
 
@@ -33,10 +31,10 @@ const App = () => {
     setFilteredBeers(termFilter);
   };
 
-  const handleSearchInput2 = (event) => {
-    let searchTerm = event.target.value.toLowerCase();
-    if (searchTerm) setFilter(`&beer_name=${searchTerm}`);
-  };
+  // const handleSearchInput2 = (event) => {
+  //   let searchTerm = event.target.value.toLowerCase();
+  //   if (searchTerm) setFilter(`&beer_name=${searchTerm}`);
+  // };
 
   const filterByHighPh = () => {
     return data.filter((beer) => {
@@ -72,27 +70,23 @@ const App = () => {
     setShowMenu(!showMenu);
   };
 
-  const handlePage = (page) => {
-    setPage(page);
-    console.log(page);
-  };
+  // const handlePage = (page) => {
+  //   setPage(page);
+  //   console.log(page);
+  // };
 
   return (
     <div className="App">
       <Nav
         handleCheckBox={handleCheckBox}
         checkBoxState={checkBoxState}
-        handleSearch={handleSearchInput2}
+        handleSearch={handleSearchInput}
         handleSlider={handleSlider}
         sliderVal={sliderState}
         toggleStyle={showMenu}
       />
       {status === "fetched" ? (
-        <BeersList
-          beersArr={filteredBeers}
-          toggle={handleMenuToggle}
-          showPage={handlePage}
-        />
+        <BeersList beersArr={filteredBeers} toggle={handleMenuToggle} />
       ) : (
         <div>
           <h2>Waiting for beers...</h2>
