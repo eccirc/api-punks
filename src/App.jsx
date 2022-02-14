@@ -14,15 +14,29 @@ const App = () => {
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
 
-  useEffect(() => {
+  const checkFilters = () => {
     if (checkBoxState[0]) {
-      setFilteredBeers(filterByAbv());
+      setFilteredBeers(filterByAbv(data));
     } else if (checkBoxState[1]) {
-      setFilteredBeers(filterByClassic("2010"));
+      setFilteredBeers(filterByClassic(data, "2010"));
     } else if (checkBoxState[2]) {
-      setFilteredBeers(filterByHighPh());
+      setFilteredBeers(filterByHighPh(data));
     } else setFilteredBeers(data);
+  };
+
+  useEffect(() => {
+    checkFilters(data);
   }, [status, checkBoxState, sliderState]);
+
+  // const checkFiltersAlt = (arr) => {
+  //   let filtered;
+  //   if (checkBoxState[0] || checkBoxState[1] || checkBoxState[2]) {
+  //     if (checkBoxState[0]) filtered = filterByAbv(arr);
+  //     if (checkBoxState[1]) filtered = filterByClassic(arr, "2010");
+  //     if (checkBoxState[2]) filtered = filterByHighPh(arr);
+  //   }
+  //   setFilteredBeers(filtered);
+  // };
 
   const handleSearchInput = (event) => {
     let searchTerm = event.target.value.toLowerCase();
@@ -32,18 +46,18 @@ const App = () => {
     setFilteredBeers(termFilter);
   };
 
-  const filterByHighPh = () => {
-    return data.filter((beer) => {
+  const filterByHighPh = (arr) => {
+    return arr.filter((beer) => {
       return beer.ph <= 4;
     });
   };
-  const filterByAbv = () => {
-    return data.filter((beer) => {
+  const filterByAbv = (arr) => {
+    return arr.filter((beer) => {
       return beer.abv > sliderState;
     });
   };
-  const filterByClassic = (yearStr) => {
-    return data.filter((beer) => {
+  const filterByClassic = (arr, yearStr) => {
+    return arr.filter((beer) => {
       const year = beer.first_brewed.split("/")[1];
       return year < yearStr;
     });
@@ -56,7 +70,7 @@ const App = () => {
 
   const handleCheckBox = (pos) => {
     const updatedCheckedState = checkBoxState.map((item, index) =>
-      index === pos ? (item = !item) : item
+      index === pos ? (item = true) : (item = false)
     );
     setCheckBoxState(updatedCheckedState);
   };
