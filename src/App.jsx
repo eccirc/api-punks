@@ -85,6 +85,7 @@ const App = () => {
           arrLength={filteredBeers.length}
           toggle={handleMenuToggle}
           showPage={handlePage}
+          pageNum={page}
         />
       ) : (
         <div>

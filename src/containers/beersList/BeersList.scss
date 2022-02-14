@@ -1,5 +1,9 @@
 @import "../../vars";
 
+.clicked {
+  color: white;
+}
+
 .beers {
   min-height: 100vh;
   width: 100%;
@@ -23,17 +27,17 @@
   &__pages {
     color: $punk-blue;
     font-size: larger;
+    font-weight: bold;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
     flex-direction: row;
     width: 100%;
-  }
-  &__pages span {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  &__pages .clicked {
-    color: white;
+    &_page {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 
   &__container {
