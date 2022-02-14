@@ -59,17 +59,15 @@ const App = () => {
       index === pos ? (item = !item) : item
     );
     setCheckBoxState(updatedCheckedState);
-    console.log(checkBoxState);
   };
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
 
-  // const handlePage = (page) => {
-  //   setPage(page);
-  //   console.log(page);
-  // };
+  const handlePage = (page) => {
+    setPage(page);
+  };
 
   return (
     <div className="App">
@@ -83,8 +81,10 @@ const App = () => {
       />
       {status === "fetched" ? (
         <BeersList
-          beersArr={filteredBeers.slice(page, page + 9)}
+          beersArr={filteredBeers.slice(page, page + 18)}
+          arrLength={filteredBeers.length}
           toggle={handleMenuToggle}
+          showPage={handlePage}
         />
       ) : (
         <div>

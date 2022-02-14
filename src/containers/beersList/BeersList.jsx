@@ -5,7 +5,7 @@ import logo from "../../assets/brewdog-logo.png";
 import search from "../../assets/search-line.png";
 
 export const BeersList = (props) => {
-  const { beersArr, toggle, showPage } = props;
+  const { beersArr, toggle, showPage, arrLength } = props;
 
   const allTheBeers = () => {
     return beersArr.map((beer, index) => (
@@ -18,6 +18,15 @@ export const BeersList = (props) => {
         abv={beer.abv}
       />
     ));
+  };
+  const pages = () => {
+    let dividedPages = [];
+    for (let i = 0; i < arrLength; i += 18) {
+      dividedPages.push(i);
+    }
+    return dividedPages.map((pageNo, index) => {
+      return <span onClick={() => showPage(pageNo)}>{index + 1}</span>;
+    });
   };
 
   return (
@@ -35,10 +44,7 @@ export const BeersList = (props) => {
       <div className="beers__pages">
         {" "}
         <p>Page:</p>
-        <span onClick={() => showPage(1)}>1</span>
-        <span onClick={() => showPage(2)}>2</span>
-        <span onClick={() => showPage(3)}>3</span>
-        <span onClick={() => showPage(4)}>4</span>
+        {pages()}
       </div>
       <div className="beers__container">{allTheBeers()}</div>
     </div>
