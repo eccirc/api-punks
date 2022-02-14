@@ -6,16 +6,16 @@ const usePunk = (filter, page) => {
 
   const brewDog = `https://api.punkapi.com/v2/beers?page=${page}` + filter;
 
+  const fetchData = async () => {
+    setStatus("fetching");
+    const response = await fetch(brewDog);
+    const data = await response.json();
+    setData(data);
+    setStatus("fetched");
+  };
+
   useEffect(() => {
     if (!filter) return;
-    const fetchData = async () => {
-      setStatus("fetching");
-      const response = await fetch(brewDog);
-      const data = await response.json();
-      setData(data);
-      setStatus("fetched");
-    };
-
     fetchData();
   }, [filter, page]);
 
