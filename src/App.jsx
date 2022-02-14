@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
   const [sliderState, setSLiderState] = useState(0);
+  const [page, setPage] = useState(0);
   const { data, status } = usePunk();
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
@@ -55,7 +56,7 @@ const App = () => {
 
   const handleCheckBox = (pos) => {
     const updatedCheckedState = checkBoxState.map((item, index) =>
-      index === pos ? (item = true) : (item = false)
+      index === pos ? (item = !item) : item
     );
     setCheckBoxState(updatedCheckedState);
     console.log(checkBoxState);
@@ -81,7 +82,10 @@ const App = () => {
         toggleStyle={showMenu}
       />
       {status === "fetched" ? (
-        <BeersList beersArr={filteredBeers} toggle={handleMenuToggle} />
+        <BeersList
+          beersArr={filteredBeers.slice(page, page + 9)}
+          toggle={handleMenuToggle}
+        />
       ) : (
         <div>
           <h2>Waiting for beers...</h2>
