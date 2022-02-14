@@ -31,11 +31,6 @@ const App = () => {
     setFilteredBeers(termFilter);
   };
 
-  // const handleSearchInput2 = (event) => {
-  //   let searchTerm = event.target.value.toLowerCase();
-  //   if (searchTerm) setFilter(`&beer_name=${searchTerm}`);
-  // };
-
   const filterByHighPh = () => {
     return data.filter((beer) => {
       return beer.ph <= 4;
