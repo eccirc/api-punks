@@ -3,13 +3,14 @@
 .filter {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 2rem;
   color: #142727;
   font-weight: bold;
   font-family: $secondary-font;
 
   &__check {
-    width: 40px;
+    width: 1.5em;
     color: orange;
   }
 }

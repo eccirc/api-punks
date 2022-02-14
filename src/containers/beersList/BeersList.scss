@@ -16,15 +16,16 @@
     justify-content: space-around;
     align-items: center;
     &_logo {
-      width: 100px;
+      width: 50px;
     }
     &_title {
-      font-size: 50px;
+      font-size: 30px;
       font-family: $main-font;
       margin-left: 2rem;
     }
   }
   &__pages {
+    margin: 2rem auto;
     color: $punk-blue;
     font-size: larger;
     font-weight: bold;
@@ -41,7 +42,7 @@
   }
 
   &__container {
-    margin-top: 2rem;
+    margin: 2rem auto;
     display: grid;
     justify-content: center;
     grid-template-columns: 100%;
@@ -59,6 +60,14 @@
   }
 
   @media screen and(min-width: 1000px) {
+    &__heading {
+      &_logo {
+        width: 100px;
+      }
+      &_title {
+        font-size: 50px;
+      }
+    }
     &__container {
       grid-template-columns: repeat(3, calc(80% / 3));
     }
