@@ -10,7 +10,7 @@ const App = () => {
   const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
   const [sliderState, setSLiderState] = useState(0);
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(18);
+  const [perPage, setPerPage] = useState(24);
   const { data, status } = usePunk();
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
@@ -101,6 +101,7 @@ const App = () => {
           toggle={handleMenuToggle}
           showPage={handlePage}
           pageNum={page}
+          perPage={perPage}
         />
       ) : (
         <div>

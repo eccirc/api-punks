@@ -5,7 +5,7 @@ import logo from "../../assets/brewdog-logo.png";
 import search from "../../assets/search-line.png";
 
 export const BeersList = (props) => {
-  const { beersArr, toggle, showPage, arrLength, pageNum } = props;
+  const { beersArr, toggle, showPage, arrLength, pageNum, perPage } = props;
 
   const allTheBeers = () => {
     return beersArr.map((beer, index) => (
@@ -16,12 +16,13 @@ export const BeersList = (props) => {
         sub={beer.tagline}
         info={beer.description}
         abv={beer.abv}
+        year={beer.first_brewed}
       />
     ));
   };
   const pages = () => {
     let dividedPages = [];
-    for (let i = 0; i < arrLength; i += 18) {
+    for (let i = 0; i < arrLength; i += perPage) {
       dividedPages.push(i);
     }
     return dividedPages.map((pageNo, index) => {
