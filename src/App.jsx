@@ -1,3 +1,5 @@
+// Run Yarn deploy when ready for a new deployment to live github pages site
+
 import "./App.scss";
 import { Nav } from "./containers/nav/Nav";
 import { BeersList } from "./containers/beersList/BeersList";
