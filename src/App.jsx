@@ -2,7 +2,6 @@ import "./App.scss";
 import { Nav } from "./containers/nav/Nav";
 import { BeersList } from "./containers/beersList/BeersList";
 import Moe from "./assets/fireballs-moe.gif";
-// import beers from "./data/beers";
 import usePunk from "./usePunk";
 import { useState, useEffect } from "react";
 
