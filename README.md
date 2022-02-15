@@ -7,6 +7,8 @@
 This project utilizes the open-source [Punk API](https://punkapi.com/documentation/v2) from brewdog, allowing you to search and filter beers according to paramaters - in this version ABV, acidity and year brewed. There is also functionality to change items displayed per page.
 This version (as per branch 'one-fetch') gets all of the data in one looped fetch request and uses custom filters to search and paginate. The second version (as branch 'with-api-funcs') is still under development, but will use the Punk API methods to do the same things.
 
+Check out a live version [here](https://eccirc.github.io/api-punks/).
+
 ## Technologies
 
 **React**, **JSX**, **HTML**, **SCSS**, **Javascript**
