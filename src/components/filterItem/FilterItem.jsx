@@ -17,7 +17,6 @@ export const FilterItem = (props) => {
         className="filter__check"
         type="checkbox"
         name="filter"
-        id="filter"
         checked={isChecked}
         onChange={handleChecked}
       />

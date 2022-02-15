@@ -26,6 +26,10 @@
     font-family: $secondary-font;
     font-size: large;
   }
+  &__sub:nth-of-type(2) {
+    font-weight: normal;
+    color: #696666;
+  }
   &__info {
     max-height: 100px;
     overflow-y: scroll;

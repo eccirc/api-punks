@@ -1,0 +1,22 @@
+@import "../../vars";
+
+.clicked {
+  color: white;
+}
+
+.pages {
+  margin: 2rem auto;
+  color: $punk-blue;
+  font-size: larger;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: row;
+  width: 100%;
+  &_page {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -2,27 +2,30 @@ import "./App.scss";
 import { Nav } from "./containers/nav/Nav";
 import { BeersList } from "./containers/beersList/BeersList";
 import Moe from "./assets/fireballs-moe.gif";
-// import beers from "./data/beers";
 import usePunk from "./usePunk";
 import { useState, useEffect } from "react";
 
 const App = () => {
-  const [filter, setFilter] = useState("&");
-  const [page, setPage] = useState(1);
   const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
-  const [sliderState, setSLiderState] = useState(page);
-  const { data, status } = usePunk(filter, page);
+  const [sliderState, setSLiderState] = useState(0);
+  const [page, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(20);
+  const { data, status } = usePunk();
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
 
-  useEffect(() => {
+  const checkFilters = () => {
     if (checkBoxState[0]) {
-      setFilteredBeers(filterByAbv());
+      setFilteredBeers(filterByAbv(data));
     } else if (checkBoxState[1]) {
-      setFilteredBeers(filterByClassic("2010"));
+      setFilteredBeers(filterByClassic(data, "2010"));
     } else if (checkBoxState[2]) {
-      setFilteredBeers(filterByHighPh());
+      setFilteredBeers(filterByHighPh(data));
     } else setFilteredBeers(data);
+  };
+
+  useEffect(() => {
+    checkFilters(data);
   }, [status, checkBoxState, sliderState]);
 
   const handleSearchInput = (event) => {
@@ -33,23 +36,18 @@ const App = () => {
     setFilteredBeers(termFilter);
   };
 
-  const handleSearchInput2 = (event) => {
-    let searchTerm = event.target.value.toLowerCase();
-    if (searchTerm) setFilter(`&beer_name=${searchTerm}`);
-  };
-
-  const filterByHighPh = () => {
-    return data.filter((beer) => {
+  const filterByHighPh = (arr) => {
+    return arr.filter((beer) => {
       return beer.ph <= 4;
     });
   };
-  const filterByAbv = () => {
-    return data.filter((beer) => {
+  const filterByAbv = (arr) => {
+    return arr.filter((beer) => {
       return beer.abv > sliderState;
     });
   };
-  const filterByClassic = (yearStr) => {
-    return data.filter((beer) => {
+  const filterByClassic = (arr, yearStr) => {
+    return arr.filter((beer) => {
       const year = beer.first_brewed.split("/")[1];
       return year < yearStr;
     });
@@ -65,7 +63,6 @@ const App = () => {
       index === pos ? (item = true) : (item = false)
     );
     setCheckBoxState(updatedCheckedState);
-    console.log(checkBoxState);
   };
 
   const handleMenuToggle = () => {
@@ -74,7 +71,11 @@ const App = () => {
 
   const handlePage = (page) => {
     setPage(page);
-    console.log(page);
+  };
+
+  const handleSelect = (event) => {
+    const val = parseInt(event.target.value);
+    setPerPage(val);
   };
 
   return (
@@ -82,16 +83,20 @@ const App = () => {
       <Nav
         handleCheckBox={handleCheckBox}
         checkBoxState={checkBoxState}
-        handleSearch={handleSearchInput2}
+        handleSearch={handleSearchInput}
         handleSlider={handleSlider}
         sliderVal={sliderState}
         toggleStyle={showMenu}
       />
       {status === "fetched" ? (
         <BeersList
-          beersArr={filteredBeers}
+          beersArr={filteredBeers.slice(page, page + perPage)}
+          arrLength={filteredBeers.length}
           toggle={handleMenuToggle}
           showPage={handlePage}
+          pageNum={page}
+          perPage={perPage}
+          handleSelect={handleSelect}
         />
       ) : (
         <div>
