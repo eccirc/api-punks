@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/api-punks/static/css/main.03db7c5d.css",
+    "main.js": "/api-punks/static/js/main.c64c1cc4.js",
+    "static/js/787.ae7c3095.chunk.js": "/api-punks/static/js/787.ae7c3095.chunk.js",
+    "static/media/beer_pour.jpg": "/api-punks/static/media/beer_pour.278e29be049df9d8097e.jpg",
+    "static/media/fireballs-moe.gif": "/api-punks/static/media/fireballs-moe.46c6467949c6ce3531a1.gif",
+    "static/media/brewdog-logo.png": "/api-punks/static/media/brewdog-logo.c6e73e2d8b05ac53d76f.png",
+    "index.html": "/api-punks/index.html",
+    "main.03db7c5d.css.map": "/api-punks/static/css/main.03db7c5d.css.map",
+    "main.c64c1cc4.js.map": "/api-punks/static/js/main.c64c1cc4.js.map",
+    "787.ae7c3095.chunk.js.map": "/api-punks/static/js/787.ae7c3095.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.03db7c5d.css",
+    "static/js/main.c64c1cc4.js"
+  ]
+}
