@@ -19,7 +19,7 @@ export const Nav = (props) => {
       <SearchBar handleInput={handleSearch} />
       <div className="nav__filters">
         <FilterItem
-          title={`HIGH ABV (> ${sliderVal}%)`}
+          title={`ABV > ${sliderVal}%`}
           isChecked={checkBoxState[0]}
           handleChecked={() => handleCheckBox(0)}
           handleSlider={handleSlider}
