@@ -10,7 +10,7 @@ const App = () => {
   const [checkBoxState, setCheckBoxState] = useState([true, false, false]);
   const [sliderState, setSLiderState] = useState(0);
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(24);
+  const [perPage, setPerPage] = useState(20);
   const { data, status } = usePunk();
   const [filteredBeers, setFilteredBeers] = useState([]);
   const [showMenu, setShowMenu] = useState(true);
@@ -28,16 +28,6 @@ const App = () => {
   useEffect(() => {
     checkFilters(data);
   }, [status, checkBoxState, sliderState]);
-
-  // const checkFiltersAlt = (arr) => {
-  //   let filtered;
-  //   if (checkBoxState[0] || checkBoxState[1] || checkBoxState[2]) {
-  //     if (checkBoxState[0]) filtered = filterByAbv(arr);
-  //     if (checkBoxState[1]) filtered = filterByClassic(arr, "2010");
-  //     if (checkBoxState[2]) filtered = filterByHighPh(arr);
-  //   }
-  //   setFilteredBeers(filtered);
-  // };
 
   const handleSearchInput = (event) => {
     let searchTerm = event.target.value.toLowerCase();
@@ -84,6 +74,11 @@ const App = () => {
     setPage(page);
   };
 
+  const handleSelect = (event) => {
+    const val = parseInt(event.target.value);
+    setPerPage(val);
+  };
+
   return (
     <div className="App">
       <Nav
@@ -102,6 +97,7 @@ const App = () => {
           showPage={handlePage}
           pageNum={page}
           perPage={perPage}
+          handleSelect={handleSelect}
         />
       ) : (
         <div>

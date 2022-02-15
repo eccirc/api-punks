@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./BeersList.scss";
 import { BeerCard } from "../../components/beerCard/BeerCard";
 import logo from "../../assets/brewdog-logo.png";
 import search from "../../assets/search-line.png";
 
 export const BeersList = (props) => {
-  const { beersArr, toggle, showPage, arrLength, pageNum, perPage } = props;
+  const {
+    beersArr,
+    toggle,
+    showPage,
+    arrLength,
+    pageNum,
+    perPage,
+    handleSelect,
+  } = props;
 
   const allTheBeers = () => {
     return beersArr.map((beer, index) => (
@@ -20,11 +28,13 @@ export const BeersList = (props) => {
       />
     ));
   };
-  const pages = () => {
+
+  const createPages = () => {
     let dividedPages = [];
     for (let i = 0; i < arrLength; i += perPage) {
       dividedPages.push(i);
     }
+    console.log(dividedPages);
     return dividedPages.map((pageNo, index) => {
       return (
         <span
@@ -37,6 +47,13 @@ export const BeersList = (props) => {
       );
     });
   };
+
+  const [pages, setPages] = useState([]);
+
+  useEffect(() => {
+    const newPages = createPages();
+    setPages(newPages);
+  }, [perPage, arrLength]);
 
   return (
     <div className="beers">
@@ -52,8 +69,15 @@ export const BeersList = (props) => {
       </div>
       <div className="beers__pages">
         {" "}
+        <label htmlFor="">Per page</label>
+        <select onChange={handleSelect}>
+          <option value={20}>20</option>
+          <option value={40}>40</option>
+          <option value={80}>80</option>
+          <option value={arrLength}>all</option>
+        </select>
         <p>Page:</p>
-        {pages()}
+        {pages}
       </div>
       <div className="beers__container">{allTheBeers()}</div>
     </div>
